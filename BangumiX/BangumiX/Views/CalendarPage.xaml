@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             x:Name="MyPage"
+             mc:Ignorable="d"
+             x:Class="BangumiX.Views.CalendarPage"
+             Title="{Binding Title}"
+             ItemsSource="{Binding Items}">
+    
+    <TabbedPage.ItemTemplate>
+        <DataTemplate>
+            <ContentPage Title="{Binding Weekday.Chinese}"  >
+                <StackLayout>
+                    <ListView x:Name="ItemsListView"
+                              ItemsSource="{Binding Items}"
+                              VerticalOptions="FillAndExpand"
+                              HasUnevenRows="true"
+                              RefreshCommand="{Binding Source={Reference MyPage}, Path=viewModel.RefreshCommand}"
+                              IsPullToRefreshEnabled="true"
+                              SeparatorColor="Gray"
+                              CachingStrategy="RecycleElement"
+                              ItemTapped="OnItemTapped"
+                              SelectionMode="None">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout Padding="10" Orientation="Horizontal">
+                                        <Image Source="{Binding Images.Common}"
+                                               WidthRequest="90"
+                                               HeightRequest="120"
+                                               Aspect="AspectFill"
+                                       />
+                                        <StackLayout>
+                                            <Label Text="{Binding Name}" 
+                                                   LineBreakMode="NoWrap" 
+                                                   Style="{DynamicResource ListItemTextStyle}" 
+                                                   FontSize="16" />
+                                            <Label Text="{Binding NameCn}" 
+                                                   LineBreakMode="NoWrap"
+                                                   Style="{DynamicResource ListItemDetailTextStyle}"
+                                                   FontSize="13" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </ContentPage>
+        </DataTemplate>
+    </TabbedPage.ItemTemplate>
+    </TabbedPage>

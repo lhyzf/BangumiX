@@ -21,12 +21,12 @@ namespace BangumiX.Views
 
             menuItems = new List<HomeMenuItem>
             {
-                new HomeMenuItem {Id = MenuItemType.Progress, Title="Progress" },
-                new HomeMenuItem {Id = MenuItemType.Collection, Title="Collection" },
-                new HomeMenuItem {Id = MenuItemType.Calendar, Title="Calendar" },
-                new HomeMenuItem {Id = MenuItemType.Search, Title="Search" },
-                new HomeMenuItem {Id = MenuItemType.Setting, Title="Setting" },
-                new HomeMenuItem {Id = MenuItemType.About, Title="About" }
+                new HomeMenuItem {Id = MenuItemType.Progress, Title="进度" },
+                new HomeMenuItem {Id = MenuItemType.Collection, Title="收藏" },
+                new HomeMenuItem {Id = MenuItemType.Calendar, Title="时间表" },
+                new HomeMenuItem {Id = MenuItemType.Search, Title="搜索" },
+                new HomeMenuItem {Id = MenuItemType.Setting, Title="设置" },
+                new HomeMenuItem {Id = MenuItemType.About, Title="关于" }
             };
 
             ListViewMenu.ItemsSource = menuItems;

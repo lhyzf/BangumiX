@@ -19,7 +19,7 @@ namespace BangumiX.ViewModels
 
         public CalendarViewModel()
         {
-            Title = "Calendar";
+            Title = "时间表";
             Items = new ObservableCollection<Calendar>();
             RefreshCommand = new Command(async () => await ExecuteRefreshCommand());
 

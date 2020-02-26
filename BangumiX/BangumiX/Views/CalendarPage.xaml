@@ -6,18 +6,18 @@
              x:Name="MyPage"
              mc:Ignorable="d"
              x:Class="BangumiX.Views.CalendarPage"
-             Title="{Binding Title}"
-             ItemsSource="{Binding Items}">
+             Title="{Binding Title, Mode=OneWay}"
+             ItemsSource="{Binding Items, Mode=OneWay}">
     
     <TabbedPage.ItemTemplate>
         <DataTemplate>
-            <ContentPage Title="{Binding Weekday.Chinese}"  >
+            <ContentPage Title="{Binding Weekday.Chinese, Mode=OneWay}"  >
                 <StackLayout>
                     <ListView x:Name="ItemsListView"
-                              ItemsSource="{Binding Items}"
+                              ItemsSource="{Binding Items, Mode=OneWay}"
                               VerticalOptions="FillAndExpand"
                               HasUnevenRows="true"
-                              RefreshCommand="{Binding Source={Reference MyPage}, Path=viewModel.RefreshCommand}"
+                              RefreshCommand="{Binding Source={Reference MyPage}, Path=viewModel.RefreshCommand, Mode=OneTime}"
                               IsPullToRefreshEnabled="true"
                               SeparatorColor="Gray"
                               CachingStrategy="RecycleElement"
@@ -27,17 +27,17 @@
                             <DataTemplate>
                                 <ViewCell>
                                     <StackLayout Padding="10" Orientation="Horizontal">
-                                        <Image Source="{Binding Images.Common}"
+                                        <Image Source="{Binding Images.Common, Mode=OneTime}"
                                                WidthRequest="90"
                                                HeightRequest="120"
                                                Aspect="AspectFill"
                                        />
                                         <StackLayout>
-                                            <Label Text="{Binding Name}" 
+                                            <Label Text="{Binding Name, Mode=OneTime}" 
                                                    LineBreakMode="NoWrap" 
                                                    Style="{DynamicResource ListItemTextStyle}" 
                                                    FontSize="16" />
-                                            <Label Text="{Binding NameCn}" 
+                                            <Label Text="{Binding NameCn, Mode=OneTime}" 
                                                    LineBreakMode="NoWrap"
                                                    Style="{DynamicResource ListItemDetailTextStyle}"
                                                    FontSize="13" />

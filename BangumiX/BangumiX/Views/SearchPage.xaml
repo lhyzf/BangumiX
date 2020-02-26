@@ -7,7 +7,7 @@
              xmlns:converter="clr-namespace:BangumiX.Converters"
              mc:Ignorable="d"
              x:Class="BangumiX.Views.SearchPage"
-             Title="{Binding Title}">
+             Title="{Binding Title, Mode=OneWay}">
     
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -27,16 +27,16 @@
         <StackLayout>
             <SearchBar Text="{Binding Keyword, Mode=OneWayToSource}" 
                        Placeholder="搜索"
-                       SearchCommand="{Binding RefreshCommand}" />
+                       SearchCommand="{Binding RefreshCommand, Mode=OneTime}" />
             <controls:InfiniteListView  x:Name="ItemsListView"
-                                        ItemsSource="{Binding Items}"
+                                        ItemsSource="{Binding Items, Mode=OneWay}"
                                         VerticalOptions="FillAndExpand"
                                         HasUnevenRows="true"
-                                        RefreshCommand="{Binding RefreshCommand}"
+                                        RefreshCommand="{Binding RefreshCommand, Mode=OneTime}"
                                         IsPullToRefreshEnabled="true"
-                                        IsRefreshing="{Binding IsBusy}"
-                                        LoadMoreCommand="{Binding LoadMoreCommand}"
-                                        HasMoreItems="{Binding HasMoreItems}"
+                                        IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                                        LoadMoreCommand="{Binding LoadMoreCommand, Mode=OneTime}"
+                                        HasMoreItems="{Binding HasMoreItems, Mode=OneWay}"
                                         SeparatorColor="Gray"
                                         ItemTapped="OnItemTapped"
                                         SelectionMode="None">
@@ -49,28 +49,28 @@
                                HorizontalOptions="Center"
                                FontSize="16"
                                Padding="0,10"
-                               IsVisible="{Binding HasMoreItems, Converter={StaticResource InverseBoolConverter}}"/>
+                               IsVisible="{Binding HasMoreItems, Converter={StaticResource InverseBoolConverter}, Mode=OneWay}"/>
                         <Label Text="正在加载" 
                                HorizontalOptions="Center"
                                FontSize="16"
                                Padding="0,10"
-                               IsVisible="{Binding IsBusy}"/>
+                               IsVisible="{Binding IsBusy, Mode=OneWay}"/>
                     </StackLayout>
                 </ListView.Footer>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Padding="10" Orientation="Horizontal">
-                                <Image Source="{Binding Images.Common}"
+                                <Image Source="{Binding Images.Common, Mode=OneTime}"
                                         WidthRequest="90"
                                         HeightRequest="120"
                                         Aspect="AspectFill" />
                                 <StackLayout>
-                                    <Label Text="{Binding Name}" 
+                                    <Label Text="{Binding Name, Mode=OneTime}" 
                                             LineBreakMode="NoWrap" 
                                             Style="{DynamicResource ListItemTextStyle}" 
                                             FontSize="16" />
-                                    <Label Text="{Binding NameCn}" 
+                                    <Label Text="{Binding NameCn, Mode=OneTime}" 
                                             LineBreakMode="NoWrap"
                                             Style="{DynamicResource ListItemDetailTextStyle}"
                                             FontSize="13" />

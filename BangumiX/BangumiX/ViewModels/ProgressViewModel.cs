@@ -18,7 +18,7 @@ namespace BangumiX.ViewModels
 
         public ProgressViewModel()
         {
-            Title = "Calendar";
+            Title = "进度";
             Items = new ObservableCollection<WatchProgress>();
             RefreshCommand = new Command(async () => await ExecuteRefreshCommand());
 

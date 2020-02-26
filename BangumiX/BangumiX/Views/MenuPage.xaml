@@ -22,7 +22,7 @@
                 <DataTemplate>
                     <ViewCell>
                         <Grid Padding="10">
-                            <Label Text="{Binding Title}" FontSize="20"/>
+                            <Label Text="{Binding Title, Mode=OneTime}" FontSize="20"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

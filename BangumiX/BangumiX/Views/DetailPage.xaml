@@ -5,14 +5,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="BangumiX.Views.DetailPage"
-             Title="{Binding Title}">
+             Title="{Binding Title, Mode=OneWay}">
     
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Refresh"  />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
+            <Label Text="Detail"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
         </StackLayout>

@@ -6,7 +6,7 @@
              xmlns:converter="clr-namespace:BangumiX.Converters"
              mc:Ignorable="d"
              x:Class="BangumiX.Views.ProgressPage"
-             Title="Progress">
+             Title="{Binding Title, Mode=OneWay}">
     
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -20,7 +20,7 @@
                       ItemsSource="{Binding Items}"
                       VerticalOptions="FillAndExpand"
                       HasUnevenRows="true"
-                      RefreshCommand="{Binding RefreshCommand}"
+                      RefreshCommand="{Binding RefreshCommand, Mode=OneTime}"
                       IsPullToRefreshEnabled="true"
                       IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                       SeparatorColor="Gray"
@@ -31,36 +31,36 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Padding="10" Orientation="Horizontal">
-                                <Image Source="{Binding Image}"
+                                <Image Source="{Binding Image, Mode=OneTime}"
                                        WidthRequest="90"
                                        HeightRequest="120"
                                        Aspect="AspectFill"/>
                                 <StackLayout HorizontalOptions="FillAndExpand">
-                                    <Label Text="{Binding DisplayName}" 
+                                    <Label Text="{Binding DisplayName, Mode=OneTime}" 
                                            LineBreakMode="TailTruncation"
                                            Style="{DynamicResource ListItemTextStyle}" 
                                            TextColor="#d26585"
                                            FontSize="16" />
-                                    <Label Text="{Binding AirWeekday}" 
+                                    <Label Text="{Binding AirWeekday, Mode=OneTime}" 
                                            LineBreakMode="TailTruncation"
                                            Style="{DynamicResource ListItemDetailTextStyle}"
-                                           TextColor="{Binding EpColor}"
+                                           TextColor="{Binding EpColor, Mode=OneWay}"
                                            FontSize="13" />
-                                    <Label Text="{Binding WatchedAndAirEpsCountDesc}" 
+                                    <Label Text="{Binding WatchedAndAirEpsCountDesc, Mode=OneWay}" 
                                            LineBreakMode="TailTruncation"
                                            Style="{DynamicResource ListItemDetailTextStyle}"
-                                           TextColor="{Binding EpColor}"
+                                           TextColor="{Binding EpColor, Mode=OneWay}"
                                            FontSize="13" />
                                     <StackLayout Orientation="Horizontal" HorizontalOptions="End" >
-                                        <Button Text="{Binding NextEpDesc}"
-                                                TextColor="{Binding EpColor}"
+                                        <Button Text="{Binding NextEpDesc, Mode=OneWay}"
+                                                TextColor="{Binding EpColor, Mode=OneWay}"
                                                 Clicked="NextEpButton_Clicked"
                                                 HeightRequest="44"
-                                                IsVisible="{Binding IsUpdating, Converter={StaticResource InverseBoolConverter}}"
+                                                IsVisible="{Binding IsUpdating, Converter={StaticResource InverseBoolConverter}, Mode=OneWay}"
                                                 BindingContext="{Binding}"
                                                 HorizontalOptions="Start"/>
-                                        <ActivityIndicator IsRunning="{Binding IsUpdating}"
-                                                           IsVisible="{Binding IsUpdating}"
+                                        <ActivityIndicator IsRunning="{Binding IsUpdating, Mode=OneWay}"
+                                                           IsVisible="{Binding IsUpdating, Mode=OneWay}"
                                                            WidthRequest="30"
                                                            HeightRequest="30"/>
                                     </StackLayout>

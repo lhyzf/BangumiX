@@ -6,8 +6,8 @@
              x:Name="MyPage"
              mc:Ignorable="d"
              x:Class="BangumiX.Views.CollectionPage"
-             Title="{Binding Title}"
-             ItemsSource="{Binding Items}">
+             Title="{Binding Title, Mode=OneWay}"
+             ItemsSource="{Binding Items, Mode=OneWay}">
 
     <TabbedPage.ToolbarItems>
         <ToolbarItem Text="动画" Order="Secondary" Clicked="SubjectTypeToolbarItem_Clicked"/>
@@ -18,13 +18,13 @@
     </TabbedPage.ToolbarItems>
     <TabbedPage.ItemTemplate>
         <DataTemplate>
-            <ContentPage Title="{Binding Status.Name}">
+            <ContentPage Title="{Binding Status.Name, Mode=OneWay}">
                 <StackLayout>
                     <ListView x:Name="ItemsListView"
-                              ItemsSource="{Binding Items}"
+                              ItemsSource="{Binding Items, Mode=OneWay}"
                               VerticalOptions="FillAndExpand"
                               HasUnevenRows="true"
-                              RefreshCommand="{Binding Source={Reference MyPage}, Path=viewModel.RefreshCommand}"
+                              RefreshCommand="{Binding Source={Reference MyPage}, Path=viewModel.RefreshCommand, Mode=OneTime}"
                               IsPullToRefreshEnabled="true"
                               SeparatorColor="Gray"
                               CachingStrategy="RecycleElement"
@@ -34,16 +34,16 @@
                             <DataTemplate>
                                 <ViewCell>
                                     <StackLayout Padding="10" Orientation="Horizontal">
-                                        <Image Source="{Binding Subject.Images.Common}"
+                                        <Image Source="{Binding Subject.Images.Common, Mode=OneTime}"
                                                WidthRequest="90"
                                                HeightRequest="120"
                                                Aspect="AspectFill" />
                                         <StackLayout>
-                                            <Label Text="{Binding Subject.Name}" 
+                                            <Label Text="{Binding Subject.Name, Mode=OneTime}" 
                                                    LineBreakMode="NoWrap" 
                                                    Style="{DynamicResource ListItemTextStyle}" 
                                                    FontSize="16" />
-                                            <Label Text="{Binding Subject.NameCn}" 
+                                            <Label Text="{Binding Subject.NameCn, Mode=OneTime}" 
                                                    LineBreakMode="NoWrap"
                                                    Style="{DynamicResource ListItemDetailTextStyle}"
                                                    FontSize="13" />

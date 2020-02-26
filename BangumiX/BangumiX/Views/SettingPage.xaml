@@ -4,7 +4,8 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="BangumiX.Views.SettingPage">
+             x:Class="BangumiX.Views.SettingPage"
+             Title="设置">
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Setting"

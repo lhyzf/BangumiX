@@ -9,7 +9,7 @@ namespace BangumiX.ViewModels
     {
         public AboutViewModel()
         {
-            Title = "About";
+            Title = "关于";
             OpenWebCommand = new Command(async () => await Browser.OpenAsync("https://xamarin.com"));
         }
 

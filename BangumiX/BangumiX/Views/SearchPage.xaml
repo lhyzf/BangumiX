@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:BangumiX.Controls"
+             xmlns:converter="clr-namespace:BangumiX.Converters"
+             mc:Ignorable="d"
+             x:Class="BangumiX.Views.SearchPage"
+             Title="{Binding Title}">
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="全部" Order="Secondary" Clicked="SubjectTypeToolbarItem_Clicked"/>
+        <ToolbarItem Text="动画" Order="Secondary" Clicked="SubjectTypeToolbarItem_Clicked"/>
+        <ToolbarItem Text="书籍" Order="Secondary" Clicked="SubjectTypeToolbarItem_Clicked"/>
+        <ToolbarItem Text="音乐" Order="Secondary" Clicked="SubjectTypeToolbarItem_Clicked"/>
+        <ToolbarItem Text="游戏" Order="Secondary" Clicked="SubjectTypeToolbarItem_Clicked"/>
+        <ToolbarItem Text="三次元" Order="Secondary" Clicked="SubjectTypeToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <SearchBar Text="{Binding Keyword, Mode=OneWayToSource}" 
+                       Placeholder="搜索"
+                       SearchCommand="{Binding RefreshCommand}" />
+            <controls:InfiniteListView  x:Name="ItemsListView"
+                                        ItemsSource="{Binding Items}"
+                                        VerticalOptions="FillAndExpand"
+                                        HasUnevenRows="true"
+                                        RefreshCommand="{Binding RefreshCommand}"
+                                        IsPullToRefreshEnabled="true"
+                                        IsRefreshing="{Binding IsBusy}"
+                                        LoadMoreCommand="{Binding LoadMoreCommand}"
+                                        HasMoreItems="{Binding HasMoreItems}"
+                                        SeparatorColor="Gray"
+                                        ItemTapped="OnItemTapped"
+                                        SelectionMode="None">
+                <x:Arguments>
+                    <ListViewCachingStrategy>RecycleElement</ListViewCachingStrategy>
+                </x:Arguments>
+                <ListView.Footer>
+                    <StackLayout>
+                        <Label Text="没有更多了" 
+                               HorizontalOptions="Center"
+                               FontSize="16"
+                               Padding="0,10"
+                               IsVisible="{Binding HasMoreItems, Converter={StaticResource InverseBoolConverter}}"/>
+                        <Label Text="正在加载" 
+                               HorizontalOptions="Center"
+                               FontSize="16"
+                               Padding="0,10"
+                               IsVisible="{Binding IsBusy}"/>
+                    </StackLayout>
+                </ListView.Footer>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="10" Orientation="Horizontal">
+                                <Image Source="{Binding Images.Common}"
+                                        WidthRequest="90"
+                                        HeightRequest="120"
+                                        Aspect="AspectFill" />
+                                <StackLayout>
+                                    <Label Text="{Binding Name}" 
+                                            LineBreakMode="NoWrap" 
+                                            Style="{DynamicResource ListItemTextStyle}" 
+                                            FontSize="16" />
+                                    <Label Text="{Binding NameCn}" 
+                                            LineBreakMode="NoWrap"
+                                            Style="{DynamicResource ListItemDetailTextStyle}"
+                                            FontSize="13" />
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </controls:InfiniteListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -24,19 +24,19 @@ namespace BangumiX.Views
                 new HomeMenuItem {Id = MenuItemType.Progress, Title="Progress" },
                 new HomeMenuItem {Id = MenuItemType.Collection, Title="Collection" },
                 new HomeMenuItem {Id = MenuItemType.Calendar, Title="Calendar" },
+                new HomeMenuItem {Id = MenuItemType.Search, Title="Search" },
                 new HomeMenuItem {Id = MenuItemType.Setting, Title="Setting" },
                 new HomeMenuItem {Id = MenuItemType.About, Title="About" }
             };
 
             ListViewMenu.ItemsSource = menuItems;
 
-            ListViewMenu.SelectedItem = menuItems[0];
-            ListViewMenu.ItemSelected += async (sender, e) =>
+            ListViewMenu.ItemTapped += async (sender, e) =>
             {
-                if (e.SelectedItem == null)
+                if (e.Item == null)
                     return;
 
-                var id = (int)((HomeMenuItem)e.SelectedItem).Id;
+                var id = (int)((HomeMenuItem)e.Item).Id;
                 await RootPage.NavigateFromMenu(id);
             };
         }
@@ -47,6 +47,7 @@ namespace BangumiX.Views
 
             if (Bangumi.Api.BangumiApi.BgmOAuth.IsLogin)
             {
+                UsernameLabel.Text = $"@{Bangumi.Api.BangumiApi.BgmOAuth.MyToken.UserId}";
                 for (int i = 0; i < 5; i++)
                 {
                     try
@@ -61,6 +62,11 @@ namespace BangumiX.Views
                         await Task.Delay(3000);
                     }
                 }
+            }
+            else
+            {
+                UsernameLabel.Text = "未登录";
+                UserAvatarImage.Source = null;
             }
         }
     }

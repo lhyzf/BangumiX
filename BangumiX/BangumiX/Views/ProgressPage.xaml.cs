@@ -21,32 +21,28 @@ namespace BangumiX.Views
         {
             InitializeComponent();
             BindingContext = viewModel = new ProgressViewModel();
-            if (!Bangumi.Api.BangumiApi.BgmOAuth.IsLogin)
-            {
-                Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
-            }
         }
 
-        private async void OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        private async void OnItemTapped(object sender, ItemTappedEventArgs e)
         {
-            var item = e.SelectedItem as WatchProgress;
-            if (item == null)
-                return;
-
-            await Navigation.PushAsync(new DetailPage(new DetailViewModel(new SubjectLarge
+            if (e.Item is WatchProgress item)
             {
-                NameCn = item.NameCn,
-                Name = item.Name,
-                Id = item.SubjectId
-            })));
-
-            // Manually deselect item.
-            ItemsListView.SelectedItem = null;
+                await Navigation.PushAsync(new DetailPage(new DetailViewModel(new SubjectLarge
+                {
+                    NameCn = item.NameCn,
+                    Name = item.Name,
+                    Id = item.SubjectId
+                })));
+            }
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            if (!Bangumi.Api.BangumiApi.BgmOAuth.IsLogin)
+            {
+                Navigation.PushAsync(new LoginPage());
+            }
 
             if (Bangumi.Api.BangumiApi.BgmOAuth.IsLogin && viewModel.Items.Count == 0)
                 viewModel.RefreshCommand.Execute(null);

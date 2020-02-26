@@ -26,7 +26,14 @@ namespace BangumiX
             DependencyService.Register<ProgressDataStore>();
             DependencyService.Register<CollectionDataStore>();
             DependencyService.Register<CalendarDataStore>();
-            MainPage = new MainPage();
+            if (Bangumi.Api.BangumiApi.BgmOAuth.IsLogin)
+            {
+                MainPage = new MainPage();
+            }
+            else
+            {
+                MainPage = new NavigationPage(new LoginPage());
+            }
         }
 
         protected override void OnStart()

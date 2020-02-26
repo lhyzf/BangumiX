@@ -38,8 +38,11 @@ namespace BangumiX.Views
                     case (int)MenuItemType.Calendar:
                         MenuPages.Add(id, new NavigationPage(new CalendarPage()));
                         break;
+                    case (int)MenuItemType.Search:
+                        MenuPages.Add(id, new NavigationPage(new SearchPage()));
+                        break;
                     case (int)MenuItemType.Setting:
-                        MenuPages.Add(id, new NavigationPage(new CalendarPage()));
+                        MenuPages.Add(id, new NavigationPage(new SettingPage()));
                         break;
                     case (int)MenuItemType.About:
                         MenuPages.Add(id, new NavigationPage(new AboutPage()));

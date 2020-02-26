@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Xamarin.Forms;
-using Xamarin.Auth;
 using Xamarin.Forms.Xaml;
 using Bangumi.Api.Services;
 using Bangumi.Api;
@@ -27,9 +26,24 @@ namespace BangumiX.Views
             if (e.Url.StartsWith($"{BgmOAuth.OAuthHOST}/{BgmOAuth.RedirectUrl}?code="))
             {
                 var code = e.Url.Replace($"{BgmOAuth.OAuthHOST}/{BgmOAuth.RedirectUrl}?code=", "");
-                await BangumiApi.BgmOAuth.GetToken(code);
-                await Navigation.PopModalAsync();
+                try
+                {
+                    await BangumiApi.BgmOAuth.GetToken(code);
+                    Application.Current.MainPage = new MainPage();
+                    //await Navigation.PopModalAsync();
+                }
+                catch (Exception)
+                {
+                    LoginWebView.Source = $"{BgmOAuth.OAuthHOST}/authorize?client_id={BgmOAuth.ClientId}&response_type=code";
+                    LoginWebView.Reload();
+                }
             }
+        }
+
+        private void RefreshToolbarItem_Clicked(object sender, EventArgs e)
+        {
+            LoginWebView.Source = $"{BgmOAuth.OAuthHOST}/authorize?client_id={BgmOAuth.ClientId}&response_type=code";
+            LoginWebView.Reload();
         }
     }
 }

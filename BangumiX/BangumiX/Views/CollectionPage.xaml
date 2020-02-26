@@ -37,8 +37,7 @@
                                         <Image Source="{Binding Subject.Images.Common}"
                                                WidthRequest="90"
                                                HeightRequest="120"
-                                               Aspect="AspectFill"
-                                       />
+                                               Aspect="AspectFill" />
                                         <StackLayout>
                                             <Label Text="{Binding Subject.Name}" 
                                                    LineBreakMode="NoWrap" 

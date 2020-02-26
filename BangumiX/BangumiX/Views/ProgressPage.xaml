@@ -25,7 +25,8 @@
                       IsRefreshing="{Binding IsBusy, Mode=OneWay}"
                       SeparatorColor="Gray"
                       CachingStrategy="RecycleElement"
-                      ItemSelected="OnItemSelected">
+                      ItemTapped="OnItemTapped"
+                      SelectionMode="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
@@ -55,7 +56,6 @@
                                                 TextColor="{Binding EpColor}"
                                                 Clicked="NextEpButton_Clicked"
                                                 HeightRequest="44"
-                                                BackgroundColor="Transparent"
                                                 IsVisible="{Binding IsUpdating, Converter={StaticResource InverseBoolConverter}}"
                                                 BindingContext="{Binding}"
                                                 HorizontalOptions="Start"/>

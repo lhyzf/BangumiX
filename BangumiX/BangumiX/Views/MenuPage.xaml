@@ -16,7 +16,8 @@
                    HorizontalOptions="Center"/>
         </StackLayout>
         <ListView x:Name="ListViewMenu"
-                  HasUnevenRows="True">
+                  HasUnevenRows="True"
+                  SelectionMode="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

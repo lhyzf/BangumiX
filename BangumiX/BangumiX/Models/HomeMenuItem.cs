@@ -9,6 +9,7 @@ namespace BangumiX.Models
         Progress,
         Collection,
         Calendar,
+        Search,
         Setting,
         About
     }

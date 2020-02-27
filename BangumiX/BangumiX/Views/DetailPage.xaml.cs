@@ -14,11 +14,18 @@ namespace BangumiX.Views
     public partial class DetailPage : ContentPage
     {
         DetailViewModel viewModel;
+        public Command EditSubjectStatusCommand { get; set; }
 
         public DetailPage(DetailViewModel viewModel)
         {
             InitializeComponent();
             BindingContext = this.viewModel = viewModel;
+            MyFloatButton.Command = new Command(async () => await ExecuteEditSubjectStatusCommand());
+        }
+
+        private async Task ExecuteEditSubjectStatusCommand()
+        {
+            await Navigation.PushAsync(new EditSubjectStatusPage(new EditSubjectStatusViewModel(viewModel.Subject.Id.ToString(), viewModel.Title)));
         }
     }
 }

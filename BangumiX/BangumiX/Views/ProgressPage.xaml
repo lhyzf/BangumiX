@@ -31,10 +31,15 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Padding="10" Orientation="Horizontal">
-                                <Image Source="{Binding Image, Mode=OneTime}"
-                                       WidthRequest="90"
+                                <Image WidthRequest="90"
                                        HeightRequest="120"
-                                       Aspect="AspectFill"/>
+                                       Aspect="AspectFill">
+                                    <Image.Source>
+                                        <UriImageSource Uri="{Binding Image, Mode=OneTime}"
+                                                        CacheValidity="14"
+                                                        CachingEnabled="True"/>
+                                    </Image.Source>
+                                </Image>
                                 <StackLayout HorizontalOptions="FillAndExpand">
                                     <Label Text="{Binding DisplayName, Mode=OneTime}" 
                                            LineBreakMode="TailTruncation"

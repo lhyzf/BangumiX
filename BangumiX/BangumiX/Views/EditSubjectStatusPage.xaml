@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:converter="clr-namespace:BangumiX.Converters"
+             mc:Ignorable="d"
+             x:Class="BangumiX.Views.EditSubjectStatusPage"
+             Title="{Binding Title, Mode=OneTime}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="CenterAndExpand">
+            <StackLayout IsVisible="{Binding IsBusy, Converter={StaticResource InverseBoolConverter}, Mode=OneWay}"
+                         Padding="20" 
+                         VerticalOptions="CenterAndExpand">
+                <Label Text="{Binding Name, Mode=OneTime}"
+                       HorizontalOptions="Center"
+                       FontSize="24"/>
+                <Label Text="状态：" Margin="0,10,0,0"/>
+                <Picker Margin="12,0"
+                        SelectedItem="{Binding Status, Mode=TwoWay}"
+                        ItemsSource="{Binding PickerStatusList, Mode=OneTime}"
+                        ItemDisplayBinding="{Binding Desc, Mode=OneWay}">
+                </Picker>
+                <Label Margin="0,10,0,0">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="我的评分："/>
+                            <Span Text="{Binding RateDesc, Mode=OneWay}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Slider Margin="0,10,0,0"
+                        Value="{Binding Rating, Mode=TwoWay}"
+                        DragCompleted="Slider_DragCompleted"
+                        Maximum="10"
+                        Minimum="0"
+                        MinimumTrackColor="Accent"
+                        MaximumTrackColor="Black"/>
+                <Label Margin="0,10,0,0"
+                       Text="吐槽 (简评，最多200字)："/>
+                <Entry Margin="12,0"
+                       Text="{Binding Comment, Mode=TwoWay}"/>
+                <StackLayout Orientation="Horizontal">
+                    <CheckBox IsChecked="{Binding PrivateBool, Mode=TwoWay}"/>
+                    <Label Text="仅自己可见"
+                           VerticalOptions="Center"/>
+                </StackLayout>
+                <Button Text="提交"
+                        IsEnabled="{Binding CanSubmit, Mode=OneWay}"
+                        VerticalOptions="EndAndExpand"
+                        Clicked="SubmitButton_Clicked"/>
+            </StackLayout>
+            <ActivityIndicator IsVisible="{Binding IsBusy, Mode=OneWay}"
+                               IsRunning="{Binding IsBusy, Mode=OneWay}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

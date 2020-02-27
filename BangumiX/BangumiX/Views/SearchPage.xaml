@@ -61,10 +61,15 @@
                     <DataTemplate>
                         <ViewCell>
                             <StackLayout Padding="10" Orientation="Horizontal">
-                                <Image Source="{Binding Images.Common, Mode=OneTime}"
-                                        WidthRequest="90"
-                                        HeightRequest="120"
-                                        Aspect="AspectFill" />
+                                <Image WidthRequest="90"
+                                       HeightRequest="120"
+                                       Aspect="AspectFill" >
+                                    <Image.Source>
+                                        <UriImageSource Uri="{Binding Images.Common, Mode=OneTime}"
+                                                        CacheValidity="14"
+                                                        CachingEnabled="True"/>
+                                    </Image.Source>
+                                </Image>
                                 <StackLayout>
                                     <Label Text="{Binding Name, Mode=OneTime}" 
                                             LineBreakMode="NoWrap" 

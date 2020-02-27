@@ -3,11 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-using Xamarin.Forms;
-
-using BangumiX.Models;
-using BangumiX.Services;
-
 namespace BangumiX.ViewModels
 {
     public class BaseViewModel : INotifyPropertyChanged

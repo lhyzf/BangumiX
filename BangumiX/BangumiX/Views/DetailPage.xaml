@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:renderers="clr-namespace:BangumiX.Renderers"
              mc:Ignorable="d"
              x:Class="BangumiX.Views.DetailPage"
              Title="{Binding Title, Mode=OneWay}">
@@ -15,6 +16,11 @@
             <Label Text="Detail"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <renderers:MyFloatButton x:Name="MyFloatButton"
+                                     WidthRequest="56" 
+                                     HeightRequest="56" 
+                                     HorizontalOptions="End"
+                                     Margin="20"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

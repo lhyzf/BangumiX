@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace BangumiX.ViewModels
 {
@@ -11,12 +13,13 @@ namespace BangumiX.ViewModels
 
         public DetailViewModel(SubjectLarge subject = null)
         {
-            Title = subject?.Name;
+            Title = subject?.NameCn;
             if (string.IsNullOrEmpty(Title))
             {
-                Title = subject?.NameCn;
+                Title = subject?.Name;
             }
             Subject = subject;
         }
+
     }
 }

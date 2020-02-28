@@ -8,12 +8,20 @@
              Title="Menu">
     
     <StackLayout>
-        <StackLayout HorizontalOptions="Center" Padding="0,20,0,10">
-            <Image x:Name="UserAvatarImage"
-                   HeightRequest="80"
-                   WidthRequest="80"/>
-            <Label x:Name="UsernameLabel"
-                   HorizontalOptions="Center"/>
+        <StackLayout Orientation="Horizontal"
+                     HorizontalOptions="FillAndExpand" 
+                     Padding="10,20,10,10">
+            <StackLayout>
+                <Image x:Name="UserAvatarImage"
+                       HeightRequest="80"
+                       WidthRequest="80"/>
+                <Label x:Name="UsernameLabel"
+                       HorizontalOptions="Center"/>
+            </StackLayout>
+            <Button Text="注销"
+                    Clicked="LogoutButton_Clicked"
+                    HorizontalOptions="End"
+                    VerticalOptions="Start"/>
         </StackLayout>
         <ListView x:Name="ListViewMenu"
                   HasUnevenRows="True"

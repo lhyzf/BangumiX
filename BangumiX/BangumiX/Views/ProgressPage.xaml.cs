@@ -39,7 +39,7 @@ namespace BangumiX.Views
             base.OnAppearing();
             if (!BangumiApi.BgmOAuth.IsLogin)
             {
-                await Navigation.PushAsync(new LoginPage());
+                await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
                 return;
             }
             if (viewModel.Items.Count == 0)
@@ -53,7 +53,7 @@ namespace BangumiX.Views
                     catch (BgmUnauthorizedException)
                     {
                         // 授权过期，返回登录界面
-                        await Navigation.PushAsync(new LoginPage());
+                        await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
                         return;
                     }
                     catch (Exception)

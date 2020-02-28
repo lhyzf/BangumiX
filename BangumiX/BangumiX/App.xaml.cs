@@ -19,7 +19,11 @@ namespace BangumiX
             {
                 Directory.CreateDirectory(folderPath);
             }
-            Bangumi.Api.BangumiApi.Init(folderPath,
+            Bangumi.Api.BangumiApi.Init(
+                "bgm8905c514a1b94ec1",
+                "b678c34dd896203627da308b6b453775",
+                "BangumiGithubVersion",
+                folderPath,
                 folderPath,
                 async (s) => await Task.FromResult(System.Text.Encoding.Default.GetBytes(s)),
                 async (b) => await Task.FromResult(System.Text.Encoding.Default.GetString(b)));

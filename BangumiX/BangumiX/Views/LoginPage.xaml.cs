@@ -12,15 +12,15 @@ namespace BangumiX.Views
         public LoginPage()
         {
             InitializeComponent();
-            LoginWebView.Source = $"{BgmOAuth.OAuthHOST}/authorize?client_id={BgmOAuth.ClientId}&response_type=code";
+            LoginWebView.Source = $"{BgmOAuth.OAuthHOST}/authorize?client_id={BangumiApi.BgmOAuth.ClientId}&response_type=code";
             LoginWebView.Navigated += LoginWebView_Navigated;
         }
 
         private async void LoginWebView_Navigated(object sender, WebNavigatedEventArgs e)
         {
-            if (e.Url.StartsWith($"{BgmOAuth.OAuthHOST}/{BgmOAuth.RedirectUrl}?code="))
+            if (e.Url.StartsWith($"{BgmOAuth.OAuthHOST}/{BangumiApi.BgmOAuth.RedirectUrl}?code="))
             {
-                var code = e.Url.Replace($"{BgmOAuth.OAuthHOST}/{BgmOAuth.RedirectUrl}?code=", "");
+                var code = e.Url.Replace($"{BgmOAuth.OAuthHOST}/{BangumiApi.BgmOAuth.RedirectUrl}?code=", "");
                 try
                 {
                     await BangumiApi.BgmOAuth.GetToken(code);
@@ -29,7 +29,7 @@ namespace BangumiX.Views
                 }
                 catch (Exception)
                 {
-                    LoginWebView.Source = $"{BgmOAuth.OAuthHOST}/authorize?client_id={BgmOAuth.ClientId}&response_type=code";
+                    LoginWebView.Source = $"{BgmOAuth.OAuthHOST}/authorize?client_id={BangumiApi.BgmOAuth.ClientId}&response_type=code";
                     LoginWebView.Reload();
                 }
             }
@@ -37,7 +37,7 @@ namespace BangumiX.Views
 
         private void RefreshToolbarItem_Clicked(object sender, EventArgs e)
         {
-            LoginWebView.Source = $"{BgmOAuth.OAuthHOST}/authorize?client_id={BgmOAuth.ClientId}&response_type=code";
+            LoginWebView.Source = $"{BgmOAuth.OAuthHOST}/authorize?client_id={BangumiApi.BgmOAuth.ClientId}&response_type=code";
             LoginWebView.Reload();
         }
     }

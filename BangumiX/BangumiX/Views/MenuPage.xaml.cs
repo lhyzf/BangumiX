@@ -51,7 +51,7 @@ namespace BangumiX.Views
                     try
                     {
                         var user = await Bangumi.Api.BangumiApi.BgmApi.User();
-                        UsernameLabel.Text = $"@{user.UserName}";
+                        UsernameLabel.Text = $"{user.NickName}@{user.UserName}";
                         UserAvatarImage.Source = user.Avatar.Medium;
                         break;
                     }
@@ -65,6 +65,16 @@ namespace BangumiX.Views
             {
                 UsernameLabel.Text = "未登录";
                 UserAvatarImage.Source = null;
+            }
+        }
+
+        private async void LogoutButton_Clicked(object sender, EventArgs e)
+        {
+            var result = await DisplayActionSheet("注销登录", "取消", "注销");
+            if (result == "注销")
+            {
+                Bangumi.Api.BangumiApi.BgmOAuth.DeleteUserFiles();
+                await Navigation.PushModalAsync(new NavigationPage(new LoginPage()));
             }
         }
     }

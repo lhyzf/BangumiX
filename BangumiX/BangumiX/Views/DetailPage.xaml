@@ -3,24 +3,185 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:renderers="clr-namespace:BangumiX.Renderers"
+             xmlns:controls="clr-namespace:XamarinUniversity.Controls"
+             xmlns:converters="clr-namespace:BangumiX.Converters"
              mc:Ignorable="d"
              x:Class="BangumiX.Views.DetailPage"
-             Title="{Binding Title, Mode=OneWay}">
-    
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Refresh"  />
-    </ContentPage.ToolbarItems>
+             Title="详情">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:FalseIfNullOrEmptyConverter x:Key="FalseIfNullOrEmptyConverter"/>
+            <converters:JsTickToDateTimeConverter x:Key="JsTickToDateTimeConverter"/>
+            <converters:ActorListConverter x:Key="ActorListConverter"/>
+            <converters:JobListConverter x:Key="JobListConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Detail"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-            <renderers:MyFloatButton x:Name="MyFloatButton"
-                                     WidthRequest="56" 
-                                     HeightRequest="56" 
-                                     HorizontalOptions="End"
-                                     Margin="20"/>
-        </StackLayout>
+        <ScrollView>
+            <StackLayout Padding="10">
+                <Label>
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="原名："
+                                  FontSize="16"
+                                  TextColor="#d26585"/>
+                            <Span Text="{Binding Name, Mode=OneTime}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label Text="影片信息"
+                       FontSize="16"
+                       Padding="0,8,0,0"
+                       TextColor="#d26585"/>
+                <Label Text="{Binding Info, Mode=OneTime}"/>
+                <Label Text="简介"
+                       FontSize="16"
+                       Padding="0,8,0,0"
+                       TextColor="#d26585"
+                       IsVisible="{Binding Summary, Converter={StaticResource FalseIfNullOrEmptyConverter}, Mode=OneTime}"/>
+                <Label Text="{Binding Summary, Mode=OneTime}"
+                       IsVisible="{Binding Summary, Converter={StaticResource FalseIfNullOrEmptyConverter}, Mode=OneTime}"/>
+                <Label Text="角色资料"
+                       FontSize="16"
+                       Padding="0,8,0,0"
+                       TextColor="#d26585"
+                       IsVisible="{Binding Characters, Converter={StaticResource FalseIfNullOrEmptyConverter}, Mode=OneTime}"/>
+                <controls:ItemsControl ItemsSource="{Binding Characters, Mode=OneTime}"
+                                       IsVisible="{Binding Characters, Converter={StaticResource FalseIfNullOrEmptyConverter}, Mode=OneTime}">
+                    <controls:ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="{Binding Images.Grid, Mode=OneTime}"
+                                       WidthRequest="75"
+                                       HeightRequest="75"/>
+                                <StackLayout>
+                                    <Label>
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Name, Mode=OneTime}"/>
+                                                <Span Text=" / "
+                                                      FontSize="13"/>
+                                                <Span Text="{Binding NameCn, Mode=OneTime}"
+                                                      FontSize="13"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label Text="{Binding RoleName, Mode=OneTime}"/>
+                                    <Label Text="{Binding Actors, Converter={StaticResource ActorListConverter}, Mode=OneTime}"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </DataTemplate>
+                    </controls:ItemsControl.ItemTemplate>
+                </controls:ItemsControl>
+                <Label Text="演职资料"
+                       FontSize="16"
+                       Padding="0,8,0,0"
+                       TextColor="#d26585"
+                       IsVisible="{Binding Staffs, Converter={StaticResource FalseIfNullOrEmptyConverter}, Mode=OneTime}"/>
+                <controls:ItemsControl ItemsSource="{Binding Staffs, Mode=OneTime}"
+                                       IsVisible="{Binding Staffs, Converter={StaticResource FalseIfNullOrEmptyConverter}, Mode=OneTime}">
+                    <controls:ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Horizontal">
+                                <Image Source="{Binding Images.Grid, Mode=OneTime}"
+                                       WidthRequest="75"
+                                       HeightRequest="75"/>
+                                <StackLayout>
+                                    <Label>
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Name, Mode=OneTime}"/>
+                                                <Span Text=" / "
+                                                      FontSize="13"/>
+                                                <Span Text="{Binding NameCn, Mode=OneTime}"
+                                                      FontSize="13"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label Text="{Binding Jobs, Converter={StaticResource JobListConverter}, Mode=OneTime}"/>
+                                </StackLayout>
+                            </StackLayout>
+                        </DataTemplate>
+                    </controls:ItemsControl.ItemTemplate>
+                </controls:ItemsControl>
+                <Label Text="评论"
+                       FontSize="16"
+                       Padding="0,8,0,0"
+                       TextColor="#d26585"
+                       IsVisible="{Binding Blogs, Converter={StaticResource FalseIfNullOrEmptyConverter}, Mode=OneTime}"/>
+                <controls:ItemsControl ItemsSource="{Binding Blogs, Mode=OneTime}" 
+                                       IsVisible="{Binding Blogs, Converter={StaticResource FalseIfNullOrEmptyConverter}, Mode=OneTime}">
+                    <controls:ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout>
+                                <StackLayout Orientation="Horizontal">
+                                    <Image Source="{Binding User.Avatar.Small, Mode=OneTime}"
+                                           WidthRequest="32"
+                                           HeightRequest="32"/>
+                                    <Label>
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding User.NickName, Mode=OneTime}"/>
+                                                <Span Text="&#10;"/>
+                                                <Span Text="{Binding DateLine, Mode=OneTime}"
+                                                      FontSize="13"
+                                                      TextColor="Gray"/>
+                                                <Span Text="{Binding Replies, StringFormat=' (+{0})'}"
+                                                      FontSize="13"
+                                                      TextColor="Red"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
+                                <Label Text="{Binding Title, Mode=OneTime}"
+                                       TextColor="RoyalBlue"/>
+                                <Label Text="{Binding Summary, Mode=OneTime}"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </controls:ItemsControl.ItemTemplate>
+                </controls:ItemsControl>
+                <Label Text="讨论版"
+                       FontSize="16"
+                       Padding="0,8,0,0"
+                       TextColor="#d26585"
+                       IsVisible="{Binding Topics, Converter={StaticResource FalseIfNullOrEmptyConverter}, Mode=OneTime}" />
+                <controls:ItemsControl ItemsSource="{Binding Topics, Mode=OneTime}"
+                                       Spacing="8"
+                                       IsVisible="{Binding Topics, Converter={StaticResource FalseIfNullOrEmptyConverter}, Mode=OneTime}">
+                    <controls:ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Spacing="1">
+                                <Label Text="{Binding Title, Mode=OneTime}"
+                                       TextColor="RoyalBlue"/>
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding User.NickName, Mode=OneTime}"/>
+                                            <Span Text=" "/>
+                                            <Span Text="{Binding Timestamp, Converter={StaticResource JsTickToDateTimeConverter}, Mode=OneTime}"
+                                                  FontSize="13" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="最后回复:"
+                                                  FontSize="13" />
+                                            <Span Text="{Binding LastPost, Converter={StaticResource JsTickToDateTimeConverter}, Mode=OneTime}"/>
+                                            <Span Text="{Binding Replies, StringFormat=' (+{0})'}"
+                                                  FontSize="13"
+                                                  TextColor="Red"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>
+                        </DataTemplate>
+                    </controls:ItemsControl.ItemTemplate>
+                </controls:ItemsControl>
+            </StackLayout>
+            
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

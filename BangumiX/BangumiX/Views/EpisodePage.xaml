@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:renderers="clr-namespace:BangumiX.Renderers"
+             xmlns:converter="clr-namespace:BangumiX.Converters"
+             mc:Ignorable="d"
+             x:Class="BangumiX.Views.EpisodePage"
+             Title="{Binding Title, Mode=OneWay}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:EpColorConverter x:Key="EpColorConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="详情" Clicked="ToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <RefreshView IsRefreshing="{Binding IsBusy, Mode=OneWay}"
+                         Command="{Binding RefreshCommand, Mode=OneWay}"
+                         Margin="10,0">
+                <CollectionView ItemsSource="{Binding GroupedEps, Mode=OneWay}"
+                                IsGrouped="True">
+                    <CollectionView.Header>
+                        <StackLayout Orientation="Horizontal" Padding="0,10">
+                            <Image Source="{Binding ImageSource, Mode=OneWay}"
+                                    WidthRequest="120"
+                                    HeightRequest="152"
+                                    Aspect="AspectFit"/>
+                            <StackLayout>
+                                <Label Text="{Binding Name}"
+                                        FontSize="20"/>
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="作品分类："/>
+                                            <Span Text="{Binding SubjectType, Mode=OneWay}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="放送开始："/>
+                                            <Span Text="{Binding AirDate, Mode=OneWay}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="放送星期："/>
+                                            <Span Text="{Binding AirWeekDay, Mode=OneWay}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="评分："/>
+                                            <Span Text="{Binding Score, Mode=OneWay}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Bangumi Anime Ranked："/>
+                                            <Span Text="{Binding Rank, Mode=OneWay}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                            </StackLayout>
+                        </StackLayout>
+                            
+                    </CollectionView.Header>
+                    <CollectionView.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Horizontal">
+                                <BoxView BackgroundColor="{StaticResource NavigationPrimary}"
+                                            WidthRequest="12"
+                                            HeightRequest="20"/>
+                                <Label Text="{Binding Key, Mode=OneWay}"
+                                        VerticalOptions="Center"/>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.GroupHeaderTemplate>
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical"
+                                            ItemSpacing="4"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <SwipeView>
+                                <SwipeView.LeftItems>
+                                    <SwipeItems>
+                                        <SwipeItem Text="看过" BackgroundColor="LightSkyBlue"
+                                                    Invoked="SwipeItem_Invoked"/>
+                                        <SwipeItem Text="撤销" BackgroundColor="#fafafa"
+                                                    Invoked="SwipeItem_Invoked"/>
+                                    </SwipeItems>
+                                </SwipeView.LeftItems>
+                                <SwipeView.RightItems>
+                                    <SwipeItems>
+                                        <SwipeItem Text="想看" BackgroundColor="LightPink"
+                                                    Invoked="SwipeItem_Invoked"/>
+                                        <SwipeItem Text="抛弃" BackgroundColor="LightGray"
+                                                    Invoked="SwipeItem_Invoked"/>
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+                                <!-- Content -->
+                                <StackLayout HorizontalOptions="FillAndExpand"
+                                                Spacing="2"
+                                                Padding="4,4"
+                                                BackgroundColor="{Binding EpStatus, Converter={StaticResource EpColorConverter}, Mode=OneWay}">
+                                    <Label FontSize="16">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Sort, Mode=OneWay}"/>
+                                                <Span Text="."/>
+                                                <Span Text="{Binding Name, Mode=OneWay}"/>
+                                                <Span Text=" / "
+                                                        FontSize="13"/>
+                                                <Span Text="{Binding NameCn, Mode=OneWay}"
+                                                        FontSize="13"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label FontSize="13">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="首播："/>
+                                                <Span Text="{Binding AirDate, Mode=OneWay}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label FontSize="13">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="时长："/>
+                                                <Span Text="{Binding Duration, Mode=OneWay}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </RefreshView>
+            <renderers:MyFloatButton x:Name="MyFloatButton"
+                                     WidthRequest="56" 
+                                     HeightRequest="56" 
+                                     HorizontalOptions="End"
+                                     VerticalOptions="End"
+                                     Margin="20"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -22,7 +22,7 @@ namespace BangumiX.Views
         {
             if (e.Item is SubjectForSearch item)
             {
-                await Navigation.PushAsync(new DetailPage(new DetailViewModel(new SubjectLarge
+                await Navigation.PushAsync(new EpisodePage(new EpisodeViewModel(new SubjectLarge
                 {
                     NameCn = item.NameCn,
                     Name = item.Name,

@@ -1,4 +1,6 @@
-﻿using Bangumi.Api.Models;
+﻿using Bangumi.Api;
+using Bangumi.Api.Exceptions;
+using Bangumi.Api.Models;
 using BangumiX.Models;
 using BangumiX.ViewModels;
 using System;
@@ -23,7 +25,7 @@ namespace BangumiX.Views
         {
             if (e.Item is WatchProgress item)
             {
-                await Navigation.PushAsync(new DetailPage(new DetailViewModel(new SubjectLarge
+                await Navigation.PushAsync(new EpisodePage(new EpisodeViewModel(new SubjectLarge
                 {
                     NameCn = item.NameCn,
                     Name = item.Name,
@@ -32,23 +34,42 @@ namespace BangumiX.Views
             }
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
-            if (!Bangumi.Api.BangumiApi.BgmOAuth.IsLogin)
+            if (!BangumiApi.BgmOAuth.IsLogin)
             {
-                Navigation.PushAsync(new LoginPage());
+                await Navigation.PushAsync(new LoginPage());
+                return;
             }
+            if (viewModel.Items.Count == 0)
+            {
+                if (!BangumiApi.BgmCache.IsUpdatedToday)
+                {
+                    try
+                    {
+                        await BangumiApi.BgmOAuth.CheckToken();
+                    }
+                    catch (BgmUnauthorizedException)
+                    {
+                        // 授权过期，返回登录界面
+                        await Navigation.PushAsync(new LoginPage());
+                        return;
+                    }
+                    catch (Exception)
+                    {
 
-            if (Bangumi.Api.BangumiApi.BgmOAuth.IsLogin && viewModel.Items.Count == 0)
+                    }
+                }
                 viewModel.RefreshCommand.Execute(null);
+            }
         }
 
         private async void NextEpButton_Clicked(object sender, EventArgs e)
         {
             var button = sender as Button;
             var item = button?.BindingContext as WatchProgress;
-            if (item == null)
+            if (item == null || viewModel.IsBusy)
                 return;
 
             try

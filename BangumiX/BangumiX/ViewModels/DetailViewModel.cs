@@ -1,25 +1,22 @@
 ﻿using Bangumi.Api.Models;
-using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Xamarin.Forms;
+using System.Linq;
 
 namespace BangumiX.ViewModels
 {
-    public class DetailViewModel : BaseViewModel
+    public class DetailViewModel
     {
-        public SubjectLarge Subject { get; set; }
-
-        public DetailViewModel(SubjectLarge subject = null)
-        {
-            Title = subject?.NameCn;
-            if (string.IsNullOrEmpty(Title))
-            {
-                Title = subject?.Name;
-            }
-            Subject = subject;
-        }
+        public string Name { get; set; }
+        public string Info { get; set; }
+        public string Summary { get; set; }
+        // 角色资料
+        public List<Character> Characters { get; set; }
+        // 演职资料
+        public List<Person> Staffs { get; set; }
+        // 评论
+        public List<Blog> Blogs { get; set; }
+        // 讨论版
+        public List<Topic> Topics { get; set; }
 
     }
 }

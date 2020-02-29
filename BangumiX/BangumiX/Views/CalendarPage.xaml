@@ -13,44 +13,45 @@
         <DataTemplate>
             <ContentPage Title="{Binding Weekday.Chinese, Mode=OneWay}"  >
                 <StackLayout>
-                    <ListView x:Name="ItemsListView"
-                              ItemsSource="{Binding Items, Mode=OneWay}"
-                              VerticalOptions="FillAndExpand"
-                              HasUnevenRows="true"
-                              RefreshCommand="{Binding Source={Reference MyPage}, Path=viewModel.RefreshCommand, Mode=OneTime}"
-                              IsPullToRefreshEnabled="true"
-                              SeparatorColor="Gray"
-                              CachingStrategy="RecycleElement"
-                              ItemTapped="OnItemTapped"
-                              SelectionMode="None">
-                        <ListView.ItemTemplate>
-                            <DataTemplate>
-                                <ViewCell>
-                                    <StackLayout Padding="10" Orientation="Horizontal">
-                                        <Image WidthRequest="90"
-                                               HeightRequest="120"
-                                               Aspect="AspectFill">
-                                            <Image.Source>
-                                                <UriImageSource Uri="{Binding Images.Common, Mode=OneTime}"
-                                                                CacheValidity="14"
-                                                                CachingEnabled="True"/>
-                                            </Image.Source>
-                                        </Image>
-                                        <StackLayout>
-                                            <Label Text="{Binding Name, Mode=OneTime}" 
-                                                   LineBreakMode="NoWrap" 
-                                                   Style="{DynamicResource ListItemTextStyle}" 
-                                                   FontSize="16" />
-                                            <Label Text="{Binding NameCn, Mode=OneTime}" 
-                                                   LineBreakMode="NoWrap"
-                                                   Style="{DynamicResource ListItemDetailTextStyle}"
-                                                   FontSize="13" />
+                    <RefreshView IsRefreshing="{Binding Source={Reference MyPage}, Path=viewModel.IsBusy, Mode=OneWay}"
+                                 Command="{Binding Source={Reference MyPage}, Path=viewModel.RefreshCommand, Mode=OneTime}">
+                        <ListView x:Name="ItemsListView"
+                                  ItemsSource="{Binding Items, Mode=OneWay}"
+                                  VerticalOptions="FillAndExpand"
+                                  HasUnevenRows="true"
+                                  SeparatorColor="Gray"
+                                  CachingStrategy="RecycleElement"
+                                  ItemTapped="OnItemTapped"
+                                  SelectionMode="None">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <StackLayout Padding="10" Orientation="Horizontal">
+                                            <Image WidthRequest="90"
+                                                   HeightRequest="120"
+                                                   Aspect="AspectFill">
+                                                <Image.Source>
+                                                    <UriImageSource Uri="{Binding Images.Common, Mode=OneTime}"
+                                                                    CacheValidity="14"
+                                                                    CachingEnabled="True"/>
+                                                </Image.Source>
+                                            </Image>
+                                            <StackLayout>
+                                                <Label Text="{Binding Name, Mode=OneTime}" 
+                                                       LineBreakMode="NoWrap" 
+                                                       Style="{DynamicResource ListItemTextStyle}" 
+                                                       FontSize="16" />
+                                                <Label Text="{Binding NameCn, Mode=OneTime}" 
+                                                       LineBreakMode="NoWrap"
+                                                       Style="{DynamicResource ListItemDetailTextStyle}"
+                                                       FontSize="13" />
+                                            </StackLayout>
                                         </StackLayout>
-                                    </StackLayout>
-                                </ViewCell>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+                    </RefreshView>
                 </StackLayout>
             </ContentPage>
         </DataTemplate>

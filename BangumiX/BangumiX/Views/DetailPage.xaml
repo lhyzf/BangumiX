@@ -52,9 +52,14 @@
                     <controls:ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <StackLayout Orientation="Horizontal">
-                                <Image Source="{Binding Images.Grid, Mode=OneTime}"
-                                       WidthRequest="75"
-                                       HeightRequest="75"/>
+                                <Image WidthRequest="75"
+                                       HeightRequest="75">
+                                    <Image.Source>
+                                        <UriImageSource Uri="{Binding Images.Grid, Mode=OneTime}"
+                                                        CacheValidity="14"
+                                                        CachingEnabled="True"/>
+                                    </Image.Source>
+                                </Image>
                                 <StackLayout>
                                     <Label>
                                         <Label.FormattedText>
@@ -84,9 +89,14 @@
                     <controls:ItemsControl.ItemTemplate>
                         <DataTemplate>
                             <StackLayout Orientation="Horizontal">
-                                <Image Source="{Binding Images.Grid, Mode=OneTime}"
-                                       WidthRequest="75"
-                                       HeightRequest="75"/>
+                                <Image WidthRequest="75"
+                                       HeightRequest="75">
+                                    <Image.Source>
+                                        <UriImageSource Uri="{Binding Images.Grid, Mode=OneTime}"
+                                                        CacheValidity="14"
+                                                        CachingEnabled="True"/>
+                                    </Image.Source>
+                                </Image>
                                 <StackLayout>
                                     <Label>
                                         <Label.FormattedText>
@@ -116,9 +126,14 @@
                         <DataTemplate>
                             <StackLayout>
                                 <StackLayout Orientation="Horizontal">
-                                    <Image Source="{Binding User.Avatar.Small, Mode=OneTime}"
-                                           WidthRequest="32"
-                                           HeightRequest="32"/>
+                                    <Image WidthRequest="32"
+                                           HeightRequest="32">
+                                        <Image.Source>
+                                            <UriImageSource Uri="{Binding User.Avatar.Small, Mode=OneTime}"
+                                                            CacheValidity="14"
+                                                            CachingEnabled="True"/>
+                                        </Image.Source>
+                                    </Image>
                                     <Label>
                                         <Label.FormattedText>
                                             <FormattedString>

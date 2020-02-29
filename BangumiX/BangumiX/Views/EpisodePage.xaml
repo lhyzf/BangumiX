@@ -27,12 +27,12 @@
                     <CollectionView.Header>
                         <StackLayout Orientation="Horizontal" Padding="0,10">
                             <Image Source="{Binding ImageSource, Mode=OneWay}"
-                                    WidthRequest="120"
-                                    HeightRequest="152"
-                                    Aspect="AspectFit"/>
+                                   WidthRequest="120"
+                                   HeightRequest="152"
+                                   Aspect="AspectFit"/>
                             <StackLayout>
                                 <Label Text="{Binding Name}"
-                                        FontSize="20"/>
+                                       FontSize="20"/>
                                 <Label>
                                     <Label.FormattedText>
                                         <FormattedString>
@@ -81,16 +81,16 @@
                         <DataTemplate>
                             <StackLayout Orientation="Horizontal">
                                 <BoxView BackgroundColor="{StaticResource NavigationPrimary}"
-                                            WidthRequest="12"
-                                            HeightRequest="20"/>
+                                         WidthRequest="12"
+                                         HeightRequest="20"/>
                                 <Label Text="{Binding Key, Mode=OneWay}"
-                                        VerticalOptions="Center"/>
+                                       VerticalOptions="Center"/>
                             </StackLayout>
                         </DataTemplate>
                     </CollectionView.GroupHeaderTemplate>
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout Orientation="Vertical"
-                                            ItemSpacing="4"/>
+                                           ItemSpacing="4"/>
                     </CollectionView.ItemsLayout>
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
@@ -98,24 +98,24 @@
                                 <SwipeView.LeftItems>
                                     <SwipeItems>
                                         <SwipeItem Text="看过" BackgroundColor="LightSkyBlue"
-                                                    Invoked="SwipeItem_Invoked"/>
+                                                   Invoked="SwipeItem_Invoked"/>
                                         <SwipeItem Text="撤销" BackgroundColor="#fafafa"
-                                                    Invoked="SwipeItem_Invoked"/>
+                                                   Invoked="SwipeItem_Invoked"/>
                                     </SwipeItems>
                                 </SwipeView.LeftItems>
                                 <SwipeView.RightItems>
                                     <SwipeItems>
                                         <SwipeItem Text="想看" BackgroundColor="LightPink"
-                                                    Invoked="SwipeItem_Invoked"/>
+                                                   Invoked="SwipeItem_Invoked"/>
                                         <SwipeItem Text="抛弃" BackgroundColor="LightGray"
-                                                    Invoked="SwipeItem_Invoked"/>
+                                                   Invoked="SwipeItem_Invoked"/>
                                     </SwipeItems>
                                 </SwipeView.RightItems>
                                 <!-- Content -->
                                 <StackLayout HorizontalOptions="FillAndExpand"
-                                                Spacing="2"
-                                                Padding="4,4"
-                                                BackgroundColor="{Binding EpStatus, Converter={StaticResource EpColorConverter}, Mode=OneWay}">
+                                             Spacing="2"
+                                             Padding="4,4"
+                                             BackgroundColor="{Binding EpStatus, Converter={StaticResource EpColorConverter}, Mode=OneWay}">
                                     <Label FontSize="16">
                                         <Label.FormattedText>
                                             <FormattedString>
@@ -123,9 +123,9 @@
                                                 <Span Text="."/>
                                                 <Span Text="{Binding Name, Mode=OneWay}"/>
                                                 <Span Text=" / "
-                                                        FontSize="13"/>
+                                                      FontSize="13"/>
                                                 <Span Text="{Binding NameCn, Mode=OneWay}"
-                                                        FontSize="13"/>
+                                                      FontSize="13"/>
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>

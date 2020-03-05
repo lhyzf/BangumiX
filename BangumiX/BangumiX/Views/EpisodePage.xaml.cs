@@ -1,11 +1,13 @@
 ﻿using Bangumi.Api.Models;
+using Bangumi.Data;
+using BangumiX.Helper;
 using BangumiX.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -29,6 +31,31 @@ namespace BangumiX.Views
             base.OnAppearing();
 
             viewModel.RefreshCommand.Execute(null);
+
+            if (SettingHelper.Setting.UseBangumiDataAirSites)
+            {
+                InitAirSites();
+            }
+        }
+
+        /// <summary>
+        /// 初始化放送站点
+        /// </summary>
+        private async Task InitAirSites()
+        {
+            if (ToolbarItems.Count > 1)
+            {
+                return;
+            }
+            var airSites = await BangumiData.GetAirSitesByBangumiIdAsync(viewModel.SubjectId);
+            if (airSites.Count != 0)
+            {
+                foreach (var site in airSites)
+                {
+                    var item = new ToolbarItem(site.SiteName, null, () => Browser.OpenAsync(site.Url), ToolbarItemOrder.Secondary);
+                    ToolbarItems.Add(item);
+                }
+            }
         }
 
         private async Task ExecuteEditSubjectStatusCommand()

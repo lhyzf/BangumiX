@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BangumiX", "BangumiX\Bangum
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bangumi.Api", "..\..\Github\Bangumi\Bangumi.Api\Bangumi.Api.csproj", "{D62EDE40-A682-4C1F-B556-0201362D93F3}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bangumi.Data", "..\..\Github\Bangumi\Bangumi.Data\Bangumi.Data.csproj", "{17BC0CAD-66A1-4E38-8C0F-0231BFB8FA41}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,18 @@ Global
 		{D62EDE40-A682-4C1F-B556-0201362D93F3}.Release|iPhone.Build.0 = Release|Any CPU
 		{D62EDE40-A682-4C1F-B556-0201362D93F3}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
 		{D62EDE40-A682-4C1F-B556-0201362D93F3}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{17BC0CAD-66A1-4E38-8C0F-0231BFB8FA41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17BC0CAD-66A1-4E38-8C0F-0231BFB8FA41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17BC0CAD-66A1-4E38-8C0F-0231BFB8FA41}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{17BC0CAD-66A1-4E38-8C0F-0231BFB8FA41}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{17BC0CAD-66A1-4E38-8C0F-0231BFB8FA41}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{17BC0CAD-66A1-4E38-8C0F-0231BFB8FA41}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{17BC0CAD-66A1-4E38-8C0F-0231BFB8FA41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17BC0CAD-66A1-4E38-8C0F-0231BFB8FA41}.Release|Any CPU.Build.0 = Release|Any CPU
+		{17BC0CAD-66A1-4E38-8C0F-0231BFB8FA41}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{17BC0CAD-66A1-4E38-8C0F-0231BFB8FA41}.Release|iPhone.Build.0 = Release|Any CPU
+		{17BC0CAD-66A1-4E38-8C0F-0231BFB8FA41}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{17BC0CAD-66A1-4E38-8C0F-0231BFB8FA41}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

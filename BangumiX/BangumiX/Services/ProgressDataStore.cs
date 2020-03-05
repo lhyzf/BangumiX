@@ -1,6 +1,7 @@
 ﻿using Bangumi.Api;
 using Bangumi.Api.Common;
 using Bangumi.Api.Models;
+using BangumiX.Helper;
 using BangumiX.Models;
 using System;
 using System.Collections.Generic;
@@ -132,15 +133,15 @@ namespace BangumiX.Services
         /// </summary>
         private IEnumerable<WatchProgress> SortWatchProgress(IEnumerable<WatchProgress> watchingStatuses)
         {
-            //if (SettingHelper.OrderByAirTime)
-            //{
+            if (SettingHelper.Setting.OrderByAirTime)
+            {
                 return watchingStatuses.OrderBy(p => p.EpColor)
                     .ThenBy(p => p.WatchedEpsCount == 0)
                     .ThenBy(p => p.AirEpsCount - p.WatchedEpsCount)
                     .ThenBy(p => p.Eps?.LastOrDefault(ep => ep.Type == EpisodeType.本篇 && !Regex.IsMatch(ep.Status, "(NA)"))?.AirDate)
                     .ThenBy(p => p.AirTime);
-            //}
-            //return watchingStatuses.OrderByDescending(w => w.LastTouch);
+            }
+            return watchingStatuses.OrderByDescending(w => w.LastTouch);
         }
 
     }

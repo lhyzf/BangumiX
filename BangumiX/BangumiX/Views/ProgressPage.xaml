@@ -60,7 +60,7 @@
                                         <Button Text="{Binding NextEpDesc, Mode=OneWay}"
                                                 TextColor="{Binding EpColor, Mode=OneWay}"
                                                 Clicked="NextEpButton_Clicked"
-                                                HeightRequest="44"
+                                                HeightRequest="42"
                                                 IsVisible="{Binding IsUpdating, Converter={StaticResource InverseBoolConverter}, Mode=OneWay}"
                                                 BindingContext="{Binding}"
                                                 HorizontalOptions="Start"/>

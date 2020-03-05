@@ -1,6 +1,8 @@
 ﻿using Bangumi.Api;
 using Bangumi.Api.Common;
 using Bangumi.Api.Models;
+using Bangumi.Data;
+using BangumiX.Helper;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -163,29 +165,29 @@ namespace BangumiX.Models
             }
             var first = Eps?.FirstOrDefault(ep => ep.Type == EpisodeType.本篇)?.AirDate;
             var last = Eps?.LastOrDefault(ep => ep.Type == EpisodeType.本篇 && !Regex.IsMatch(ep.Status, "(NA)"))?.AirDate;
-            //if (SettingHelper.UseBangumiDataAirTime &&
-            //    BangumiData.GetAirTimeByBangumiId(subject.Id.ToString())?.ToLocalTime() is DateTimeOffset date)
-            //{
-            //    if (first != null && last != null)
-            //    {
-            //        AirTime = date.AddTicks(last.Value.Ticks).AddTicks(-first.Value.Ticks).ToString("yyyy-MM-dd HH:mm");
-            //    }
-            //    else
-            //    {
-            //        AirTime = date.ToString("yyyy-MM-dd HH:mm");
-            //    }
-            //}
-            //else if (DateTime.TryParse(AirTime, out var airDate))
-            //{
-            //    if (first != null && last != null)
-            //    {
-            //        AirTime = airDate.AddTicks(last.Value.Ticks).AddTicks(-first.Value.Ticks).ToString("yyyy-MM-dd");
-            //    }
-            //    else
-            //    {
-            //        AirTime = airDate.ToString("yyyy-MM-dd");
-            //    }
-            //}
+            if (SettingHelper.Setting.UseBangumiDataAirTime &&
+                BangumiData.GetAirTimeByBangumiId(subject.Id.ToString())?.ToLocalTime() is DateTimeOffset date)
+            {
+                if (first != null && last != null)
+                {
+                    AirTime = date.AddTicks(last.Value.Ticks).AddTicks(-first.Value.Ticks).ToString("yyyy-MM-dd HH:mm");
+                }
+                else
+                {
+                    AirTime = date.ToString("yyyy-MM-dd HH:mm");
+                }
+            }
+            else if (DateTime.TryParse(AirTime, out var airDate))
+            {
+                if (first != null && last != null)
+                {
+                    AirTime = airDate.AddTicks(last.Value.Ticks).AddTicks(-first.Value.Ticks).ToString("yyyy-MM-dd");
+                }
+                else
+                {
+                    AirTime = airDate.ToString("yyyy-MM-dd");
+                }
+            }
         }
 
         public void ProcessProgress(Progress progress)

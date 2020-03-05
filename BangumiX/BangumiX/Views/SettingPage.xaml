@@ -3,14 +3,98 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:BangumiX.Controls"
+             xmlns:converter="clr-namespace:BangumiX.Converters"
              mc:Ignorable="d"
              x:Class="BangumiX.Views.SettingPage"
              Title="设置">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:InverseBoolConverter x:Key="InverseBoolConverter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
         <StackLayout>
-            <Label Text="Setting"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+            <controls:LabeledSwitch Title="进度排序" 
+                                    OnText="按放送时间排序"
+                                    OffText="默认排序"
+                                    Padding="10"
+                                    IsOn="{Binding OrderByAirTime, Mode=TwoWay}"/>
+            <!-- 使用BangumiData -->
+            <controls:LabeledSwitch Title="使用 Bangumi-data" 
+                                    OnText="开启"
+                                    OffText="关闭"
+                                    Padding="10"
+                                    IsOn="{Binding UseBangumiData, Mode=TwoWay}"/>
+            <StackLayout IsVisible="{Binding UseBangumiData, Mode=OneWay}">
+                <Label Padding="10,0">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="数据版本："/>
+                            <Span Text="{Binding BangumiDataVersion, Mode=OneWay}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Grid Margin="8,0,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Text="{Binding BangumiDataStatus, Mode=OneWay}"
+                            IsEnabled="{Binding BangumiDataVersionChecking,Converter={StaticResource InverseBoolConverter}, Mode=OneWay}"
+                            Clicked="UpdateBangumiDataButton_Clicked"/>
+                    <ActivityIndicator Grid.Column="1"
+                                       IsVisible="{Binding BangumiDataVersionChecking, Mode=OneWay}"
+                                       HorizontalOptions="Start"
+                                       IsRunning="True"
+                                       Margin="10,0,0,0"
+                                       WidthRequest="32"/>
+                </Grid>
+                <!-- 显示番剧放送网站 -->
+                <controls:LabeledSwitch IsOn="{Binding UseBangumiDataAirSites, Mode=TwoWay}" 
+                                        Title="使用 bangumi-data 数据显示番剧放送网站"
+                                        OnText="开启"
+                                        OffText="关闭"
+                                        Padding="10"/>
+                <!-- 推测放送时间 -->
+                <controls:LabeledSwitch IsOn="{Binding UseBangumiDataAirTime, Mode=TwoWay}" 
+                                        Title="进度页使用 bangumi-data 推测放送时间"
+                                        OnText="开启"
+                                        OffText="关闭"
+                                        Padding="10"/>
+                <controls:LabeledSwitch Title="自动检查更新"
+                                        OnText="开启"
+                                        OffText="关闭"
+                                        Padding="10"
+                                        IsOn="{Binding BangumiDataAutoCheck, Mode=TwoWay}"/>
+                <controls:LabeledSwitch Title="自动下载更新"
+                                        OnText="开启"
+                                        OffText="关闭"
+                                        Padding="10"
+                                        IsVisible="{Binding BangumiDataAutoCheck, Mode=OneWay}"
+                                        IsOn="{Binding BangumiDataAutoUpdate, Mode=TwoWay}"/>
+                <Label Text="检查更新间隔天数(0-90)："
+                       TextColor="Black"
+                       FontSize="16"
+                       Padding="10,0"
+                       IsVisible="{Binding BangumiDataAutoCheck, Mode=OneWay}"/>
+                <StackLayout Orientation="Horizontal"
+                             Padding="10,0"
+                             IsVisible="{Binding BangumiDataAutoCheck, Mode=OneWay}">
+                    <Button Text="-" 
+                            Clicked="MinusIntervalButton_Clicked"
+                            WidthRequest="50"/>
+                    <Entry x:Name="CheckIntervalNumbox" 
+                           Text="{Binding BangumiDataCheckInterval, Mode=TwoWay}"
+                           WidthRequest="50"
+                           HorizontalTextAlignment="Center"
+                           Keyboard="Numeric"/>
+                    <Button Text="+" 
+                            Clicked="AddIntervalButton_Clicked"
+                            WidthRequest="50"/>
+                </StackLayout>
+
+            </StackLayout>
+  </StackLayout>
     </ContentPage.Content>
 </ContentPage>
